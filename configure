@@ -3940,7 +3940,7 @@ fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_libevent_dir" >&5
 $as_echo "$ac_cv_libevent_dir" >&6; }
 # '
-LIBS="$LIBS -levent"
+LIBS="$LIBS -levent -lpthread"
 if test $ac_cv_libevent_dir != "(system)"; then
   if test -d "$ac_cv_libevent_dir/lib" ; then
     LDFLAGS="-L$ac_cv_libevent_dir/lib $LDFLAGS"
@@ -4358,7 +4358,7 @@ if test "x$ac_cv_header_lmdb_h" = xyes; then :
 
 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mdb_env_create in -llmdb" >&5
 $as_echo_n "checking for mdb_env_create in -llmdb... " >&6; }
-if ${ac_cv_lib_mdb_mdb_env_create+:} false; then :
+if ${ac_cv_lib_lmdb_mdb_env_create+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
@@ -4382,17 +4382,17 @@ return mdb_env_create ();
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  ac_cv_lib_mdb_mdb_env_create=yes
+  ac_cv_lib_lmdb_mdb_env_create=yes
 else
-  ac_cv_lib_mdb_mdb_env_create=no
+  ac_cv_lib_lmdb_mdb_env_create=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
 LIBS=$ac_check_lib_save_LIBS
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_mdb_mdb_env_create" >&5
-$as_echo "$ac_cv_lib_mdb_mdb_env_create" >&6; }
-if test "x$ac_cv_lib_mdb_mdb_env_create" = xyes; then :
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_lib_lmdb_mdb_env_create" >&5
+$as_echo "$ac_cv_lib_lmdb_mdb_env_create" >&6; }
+if test "x$ac_cv_lib_lmdb_mdb_env_create" = xyes; then :
   cat >>confdefs.h <<_ACEOF
 #define HAVE_LIBLMDB 1
 _ACEOF
