@@ -2,7 +2,7 @@ Dependencies
 ============
 Before deploying Memcachedb, make sure the following packages are installed:
 
-OpenLDAP 2.4.33 or later libmdb
+OpenLDAP 2.4.33 or later liblmdb
 -------------------------
 http://www.openldap.org
 
@@ -11,8 +11,8 @@ How to install MDB:
 $tar xvzf openldap-2.4.33.tgz
 $cd openldap=2.4.33/libraries/libmdb
 $make
-$sudo cp mdb.h /usr/local/include
-$sudo cp libmdb.* /usr/local/lib
+$sudo cp lmdb.h /usr/local/include
+$sudo cp liblmdb.* /usr/local/lib
 
 
 libevent 1.3e or later
