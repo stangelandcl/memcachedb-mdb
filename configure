@@ -4356,13 +4356,13 @@ done
 ac_fn_c_check_header_mongrel "$LINENO" "lmdb.h" "ac_cv_header_lmdb_h" "$ac_includes_default"
 if test "x$ac_cv_header_lmdb_h" = xyes; then :
 
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mdb_env_create in -lmdb" >&5
-$as_echo_n "checking for mdb_env_create in -lmdb... " >&6; }
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for mdb_env_create in -llmdb" >&5
+$as_echo_n "checking for mdb_env_create in -llmdb... " >&6; }
 if ${ac_cv_lib_mdb_mdb_env_create+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   ac_check_lib_save_LIBS=$LIBS
-LIBS="-lmdb  $LIBS"
+LIBS="-llmdb  $LIBS"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
