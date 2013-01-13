@@ -76,7 +76,7 @@
  */
 static void drive_machine(conn *c);
 static int new_socket(struct addrinfo *ai);
-static int server_socket(const int port, const bool is_udp);
+static int server_socket(int port, const bool is_udp);
 static int try_read_command(conn *c);
 static int try_read_network(conn *c);
 static int try_read_udp(conn *c);
@@ -1926,34 +1926,24 @@ static void maximize_sndbuf(const int sfd) {
         fprintf(stderr, "<%d send buffer was %d, now %d\n", sfd, old_size, last_good);
 }
 
-static int server_socket(const int port, const bool is_udp) {
+static int server_socket(int port, const bool is_udp) {
     int sfd;
     struct linger ling = {0, 0};
     struct addrinfo *ai;
     struct addrinfo *next;
-    struct addrinfo hints;
+    struct addrinfo hints = { .ai_flags = AI_PASSIVE,
+                              .ai_family = AF_UNSPEC };
     char port_buf[NI_MAXSERV];
     int error;
     int success = 0;
 
     int flags =1;
 
-    /*
-     * the memset call clears nonstandard fields in some impementations
-     * that otherwise mess things up.
-     */
-    memset(&hints, 0, sizeof (hints));
-    hints.ai_flags = AI_PASSIVE|AI_ADDRCONFIG;
-    if (is_udp)
-    {
-        hints.ai_protocol = IPPROTO_UDP;
-        hints.ai_socktype = SOCK_DGRAM;
-        hints.ai_family = AF_INET; /* This left here because of issues with OSX 10.5 */
-    } else {
-        hints.ai_family = AF_UNSPEC;
-        hints.ai_protocol = IPPROTO_TCP;
-        hints.ai_socktype = SOCK_STREAM;
-    }
+    hints.ai_socktype = is_udp ? SOCK_DGRAM : SOCK_STREAM;
+
+    if (port == -1)
+	port = 0;
+
 
     snprintf(port_buf, NI_MAXSERV, "%d", port);
     error= getaddrinfo(settings.inter, port_buf, &hints, &ai);
